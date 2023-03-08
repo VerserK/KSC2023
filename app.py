@@ -34,7 +34,7 @@ def hello():
 def appLine():
     try:
         request_data = request.get_json()
-        print(logging.info(request_data))
+        logging.info(request_data)
         tokenLine = tokenLineBot()
         eventsLine = request_data['events'][0]
         replyToken = eventsLine['replyToken']
