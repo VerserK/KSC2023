@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template, request, redirect, url_for, send_from_directory, jsonify
+from flask import Flask, abort, session, render_template, request, redirect, url_for, send_from_directory, jsonify
 from flask_cors import CORS, cross_origin
 import os
 from action import *
@@ -16,6 +16,11 @@ from linebot.models import (
 )
 
 app = Flask(__name__)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+line_bot_api = LineBotApi('DyITlNB5yxdCVz0PON6HSVmND2UwXVnRF6mEzlE16R0k4f0+Tn9QCjYzt8cnYOnU67tdzaSzj0KXL2U9G/d8U1lW7qDOjOT0MSeAZ24YtinOXZYVEGyEwQjyUxY2h12WcNUIyTGQJ7GswwqJQZcofwdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('5918103e14e75de5ececff14766bbbdc')
 
 @app.route('/')
 def index():
@@ -42,9 +47,9 @@ def hello():
 @cross_origin()
 def appLine():
     try:
-        request_data = request.get_data(as_text=True)
+        json = request.json
         tokenLine = tokenLineBot()
-        eventsLine = request_data['events'][0]
+        eventsLine = json['events'][0]
         replyToken = eventsLine['replyToken']
         userId = eventsLine['source']['userId']
         typeEvents = eventsLine['type']
