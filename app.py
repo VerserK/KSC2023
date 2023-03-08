@@ -35,7 +35,7 @@ def hello():
 @cross_origin()
 def appLine():
     try:
-        json = request.json
+        json = request.get_json()
         tokenLine = tokenLineBot()
         eventsLine = json['events'][0]
         replyToken = eventsLine['replyToken']
