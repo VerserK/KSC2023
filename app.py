@@ -36,7 +36,6 @@ def appLine():
     try:
         request_data = request.get_json(force = True) 
         logging.info(request_data)
-        print(request_data)
         tokenLine = tokenLineBot()
         eventsLine = request_data['events'][0]
         replyToken = eventsLine['replyToken']
