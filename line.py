@@ -18,7 +18,7 @@ def sendReplyMessageTextLine(tokenLine, replyToken, message):
     'Content-Type': 'application/json'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.post(url, headers=headers, data=payload)
     return response
 
 
@@ -40,7 +40,7 @@ def sendReplyFlexMessageLine(tokenLine, replyToken, message):
     'Content-Type': 'application/json'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.post(url, headers=headers, data=payload)
     return response
 
 def sendReplyFlexMessageAllMsgLine(tokenLine, replyToken, message):
@@ -65,7 +65,7 @@ def sendReplyFlexMessageAllMsgLine(tokenLine, replyToken, message):
     'Content-Type': 'application/json'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.post(url, headers=headers, data=payload)
     return response
 
 def sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, message, packageId, stId):
@@ -90,5 +90,5 @@ def sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, message, packageId,
     'Content-Type': 'application/json'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.post(url, headers=headers, data=payload)
     return response
