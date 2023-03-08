@@ -1,6 +1,5 @@
 Flask==2.0.2
 flask_cors
 psycopg2
-typing
 jsons==1.6.3
 jsonify
