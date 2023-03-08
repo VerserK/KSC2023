@@ -4,11 +4,9 @@ import os
 from action import *
 from line import *
 from tokenLine import *
+import logging
 
 app = Flask(__name__)
-CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
-app.config["DEBUG"] = True
 
 @app.route('/')
 def index():
@@ -35,9 +33,10 @@ def hello():
 @cross_origin()
 def appLine():
     try:
-        event_data = request.json
+        request_data = request.get_json()
+        print(logging.info(request_data))
         tokenLine = tokenLineBot()
-        eventsLine = event_data['events'][0]
+        eventsLine = request_data['events'][0]
         replyToken = eventsLine['replyToken']
         userId = eventsLine['source']['userId']
         typeEvents = eventsLine['type']
