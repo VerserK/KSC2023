@@ -4,3 +4,4 @@ psycopg2
 jsons==1.6.3
 jsonify
 requests==2.28.2
+line-bot-sdk

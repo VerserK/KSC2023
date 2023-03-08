@@ -4,8 +4,16 @@ import os
 from action import *
 from line import *
 from tokenLine import *
-import logging
-import sys
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError,LineBotApiError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,FlexSendMessage,SourceUser,LocationSendMessage, RichMenu, RichMenuArea, RichMenuSize,
+    RichMenuBounds, URIAction, MessageAction, FollowEvent
+)
 
 app = Flask(__name__)
 
@@ -34,8 +42,7 @@ def hello():
 @cross_origin()
 def appLine():
     try:
-        request_data = request.get_json(force = True) 
-        logging.info(request_data)
+        request_data = request.get_data(as_text=True)
         tokenLine = tokenLineBot()
         eventsLine = request_data['events'][0]
         replyToken = eventsLine['replyToken']
