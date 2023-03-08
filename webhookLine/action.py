@@ -3,8 +3,8 @@ from flask import Flask ,session, render_template, request, redirect, url_for, s
 from flask_cors import CORS, cross_origin
 from flask import request
 from config.token import tokenLineBot
-from flexMessage.flex import selectTypeCar
-from flexMessage.flex import promotionFlex
+from ..flexMessage.flex import selectTypeCar
+from ..flexMessage.flex import promotionFlex
 
 def authenticateUser():
     try:
