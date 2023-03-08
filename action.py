@@ -1,5 +1,3 @@
-import flask
-from flask import Flask ,session, render_template, request, redirect, url_for, send_from_directory
 from flexm import *
 
 def authenticateUser():
