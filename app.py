@@ -3,8 +3,8 @@ from flask import Flask ,session, render_template, request, redirect, url_for, s
 from flask import request
 from flask import jsonify
 import os
-from .webhookLine.action import *
-from .service.line import *
+from .webhookLine import action
+from .service import line
 
 app = Flask(__name__)
 
