@@ -3,7 +3,7 @@ from service.line import *
 from lib import *
 from config.token import *
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
