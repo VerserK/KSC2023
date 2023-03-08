@@ -1,6 +1,5 @@
 import flask
 from flask import Flask ,session, render_template, request, redirect, url_for, send_from_directory
-from flask_cors import CORS, cross_origin
 from flask import request
 from flask import jsonify
 import os
@@ -31,7 +30,6 @@ def hello():
        return redirect(url_for('index'))
 
 @app.route('/api/v1/appLine', methods=['POST'])
-@cross_origin()
 def appLine():
     try:
         json = request.json
