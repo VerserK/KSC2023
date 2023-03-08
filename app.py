@@ -1,10 +1,14 @@
 from flask import Flask, session, render_template, request, redirect, url_for, send_from_directory, jsonify
+from flask_cors import CORS, cross_origin
 import os
 from action import *
 from line import *
 from tokenLine import *
 
 app = Flask(__name__)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+app.config["DEBUG"] = True
 
 @app.route('/')
 def index():
@@ -28,6 +32,7 @@ def hello():
        return redirect(url_for('index'))
 
 @app.route('/api/v1/appLine', methods=['POST'])
+@cross_origin()
 def appLine():
     try:
         json = request.json
