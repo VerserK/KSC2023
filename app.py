@@ -3,7 +3,7 @@ from line import *
 from lib import *
 from tokenLine import *
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["DEBUG"] = True
