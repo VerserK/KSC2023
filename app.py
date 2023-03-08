@@ -1,11 +1,8 @@
-import flask
-from flask import Flask ,session, render_template, request, redirect, url_for, send_from_directory
-from flask import request
-from flask import jsonify
+from flask import Flask, session, render_template, request, redirect, url_for, send_from_directory, jsonify
 import os
-from webhookLine import action
-from service import line
-from config import token
+from action import *
+from line import *
+from tokenLine import *
 
 app = Flask(__name__)
 
@@ -34,7 +31,7 @@ def hello():
 def appLine():
     try:
         json = request.json
-        tokenLine = token.tokenLineBot()
+        tokenLine = tokenLineBot()
         eventsLine = json['events'][0]
         replyToken = eventsLine['replyToken']
         userId = eventsLine['source']['userId']
@@ -43,104 +40,104 @@ def appLine():
         if typeEvents == 'message' :
             if eventsLine['message']['type'] == "text" :
                 if eventsLine['message']['text'] == "ต้องการสอบถามโปรโมชันของสินค้าใดครับ ?" :
-                    response = action.authenticateUser()
+                    response = authenticateUser()
                     if response['response'] == 'OK' :
-                        line.sendReplyFlexMessageLine(tokenLine, replyToken, response['data'])
+                        sendReplyFlexMessageLine(tokenLine, replyToken, response['data'])
                     else :
-                        line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                        sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                 elif eventsLine['message']['text'] == "a" :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, "abc")
+                    sendReplyMessageTextLine(tokenLine, replyToken, "abc")
                 else :
                     if eventsLine['message']['text'].find("กรุณาระบุมูลค่าอะไหล่ก่อนหักส่วนลด") != -1 :
                         listStr = eventsLine['message']['text'].split()
                         if listStr[0] == "รถแทรกเตอร์" :
                             newStr = listStr[3]
-                            response = action.promotion(newStr, listStr[0])
+                            response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                line.sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
                             else :
-                                line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                                sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         elif listStr[0] == "รถเกี่ยวนวดข้าวไม่รวมตีนตะขาบ" :
                             newStr = listStr[3]
-                            response = action.promotion(newStr, listStr[0])
+                            response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                line.sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
                             else :
-                                line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                                sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         elif listStr[0] == "รถขุด" :
                             newStr = listStr[3]
-                            response = action.promotion(newStr, listStr[0])
+                            response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                line.sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
                             else :
-                                line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                                sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         elif listStr[0] == "รถดำนาเดินตาม" :
                             newStr = listStr[3]
-                            response = action.promotion(newStr, listStr[0])
+                            response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                line.sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
                             else :
-                                line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                                sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         elif listStr[0] == "รถดำนานั่งขับ" :
                             newStr = listStr[3]
-                            response = action.promotion(newStr, listStr[0])
+                            response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                line.sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736')
                             else :
-                                line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                                sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         else :
-                            line.sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
+                            sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
                     else :
-                        line.sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
+                        sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
             else :
-                line.sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
+                sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
         elif typeEvents == 'postback' :
             if eventsLine['postback']['data'] == "test" :
-                line.sendReplyMessageTextLine(tokenLine, replyToken, "กรุณาระบุมูลค่าอะไหล่ก่อนหักส่วนลดของงานบริการนี้ด้วยครับ (ใส่เฉพาะตัวเลขเท่านั้น)")
+                sendReplyMessageTextLine(tokenLine, replyToken, "กรุณาระบุมูลค่าอะไหล่ก่อนหักส่วนลดของงานบริการนี้ด้วยครับ (ใส่เฉพาะตัวเลขเท่านั้น)")
             elif eventsLine['postback']['data'] == "ไม่มีข้อมูล" :
-                line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่พบข้อมูลโปรโมชันพิเศษ")
+                sendReplyMessageTextLine(tokenLine, replyToken, "ไม่พบข้อมูลโปรโมชันพิเศษ")
             elif eventsLine['postback']['data'] == "ไม่ใช่" :
-                line.sendReplyMessageTextLine(tokenLine, replyToken, "ขอบคุณครับ")
+                sendReplyMessageTextLine(tokenLine, replyToken, "ขอบคุณครับ")
             elif eventsLine['postback']['data'] == "แทรกเตอร์01" :
-                response = action.promotionSpecial(eventsLine['postback']['data'])
+                response = promotionSpecial(eventsLine['postback']['data'])
                 if response['response'] == 'OK' :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
+                    sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
                 else :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                    sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
             elif eventsLine['postback']['data'] == "แทรกเตอร์02" :
-                response = action.promotionSpecial(eventsLine['postback']['data'])
+                response = promotionSpecial(eventsLine['postback']['data'])
                 if response['response'] == 'OK' :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
+                    sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
                 else :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                    sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
             elif eventsLine['postback']['data'] == "เกี่ยวข้าว01" :
-                response = action.promotionSpecial(eventsLine['postback']['data'])
+                response = promotionSpecial(eventsLine['postback']['data'])
                 if response['response'] == 'OK' :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
+                    sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
                 else :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                    sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
             elif eventsLine['postback']['data'] == "ขุด01" :
-                response = action.promotionSpecial(eventsLine['postback']['data'])
+                response = promotionSpecial(eventsLine['postback']['data'])
                 if response['response'] == 'OK' :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
+                    sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
                 else :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                    sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
             elif eventsLine['postback']['data'] == "ดำนาเดินตาม01" :
-                response = action.promotionSpecial(eventsLine['postback']['data'])
+                response = promotionSpecial(eventsLine['postback']['data'])
                 if response['response'] == 'OK' :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
+                    sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
                 else :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                    sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
             elif eventsLine['postback']['data'] == "ดำนานั่งขับ01" :
-                response = action.promotionSpecial(eventsLine['postback']['data'])
+                response = promotionSpecial(eventsLine['postback']['data'])
                 if response['response'] == 'OK' :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
+                    sendReplyMessageTextLine(tokenLine, replyToken, response['data'])
                 else :
-                    line.sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
+                    sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
             else :
-                line.sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
+                sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
         else :
-            line.sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
+            sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
         return jsonify({ 'response':'OK'})
     except Exception as error:
         return jsonify({'response':'ER'})
