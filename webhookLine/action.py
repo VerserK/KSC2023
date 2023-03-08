@@ -3,12 +3,11 @@ from flask import Flask ,session, render_template, request, redirect, url_for, s
 from flask_cors import CORS, cross_origin
 from flask import request
 from config.token import tokenLineBot
-from ..flexMessage.flex import selectTypeCar
-from ..flexMessage.flex import promotionFlex
+from flexMessage import flexm
 
 def authenticateUser():
     try:
-        flex = selectTypeCar()
+        flex = flexm.selectTypeCar()
         return {'response':'OK', 'data':flex}
     except Exception as error:
         return {'response':'ER', 'data':None}
@@ -19,7 +18,7 @@ def promotion(amount, typeCar):
         if typeCar == 'รถแทรกเตอร์':
             if newAmount < 1000:
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
@@ -27,7 +26,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             elif newAmount >= 1000 and newAmount < 2000:
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 10% ครับ',
                     'flex':flex
@@ -35,7 +34,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             elif newAmount >= 2000 and newAmount < 5000:
                 yesData = 'แทรกเตอร์01'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 10% ครับ',
                     'flex':flex
@@ -43,7 +42,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             elif newAmount >= 5000:
                 yesData = 'แทรกเตอร์02'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% ครับ',
                     'flex':flex
@@ -52,7 +51,7 @@ def promotion(amount, typeCar):
         elif typeCar == 'รถเกี่ยวนวดข้าวไม่รวมตีนตะขาบ':
             if newAmount < 5000:
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
@@ -60,7 +59,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             elif newAmount >= 5000:
                 yesData = 'เกี่ยวข้าว01'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% ครับ',
                     'flex':flex
@@ -69,7 +68,7 @@ def promotion(amount, typeCar):
         elif typeCar == 'รถขุด':
             if newAmount >= 3000 and newAmount < 5000:
                 yesData = 'ขุด01'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
@@ -77,7 +76,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             elif newAmount >= 5000:
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% ครับ',
                     'flex':flex
@@ -85,7 +84,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             else :
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
@@ -94,7 +93,7 @@ def promotion(amount, typeCar):
         elif typeCar == 'รถดำนาเดินตาม':
             if newAmount > 1 and newAmount < 10000:
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% (ชุดส้อมหัวปักดำและยางลด 10%) ครับ',
                     'flex':flex
@@ -102,7 +101,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             elif newAmount >= 10000:
                 yesData = 'ดำนาเดินตาม01'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% (ชุดส้อมหัวปักดำและยางลด 10%) ครับ',
                     'flex':flex
@@ -110,7 +109,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             else :
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
@@ -119,7 +118,7 @@ def promotion(amount, typeCar):
         elif typeCar == 'รถดำนานั่งขับ':
             if newAmount >= 1000 and newAmount < 5000:
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 10% ครับ',
                     'flex':flex
@@ -127,7 +126,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             elif newAmount >= 5000 and newAmount < 10000:
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% (ชุดส้อมหัวปักดำและยางลด 10%) ครับ',
                     'flex':flex
@@ -135,7 +134,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             elif newAmount >= 10000:
                 yesData = 'ดำนานั่งขับ01'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% (ชุดส้อมหัวปักดำและยางลด 10%) ครับ',
                     'flex':flex
@@ -143,7 +142,7 @@ def promotion(amount, typeCar):
                 return {'response':'OK', 'data':dataResponse['msg']}
             else :
                 yesData = 'ไม่มีข้อมูล'
-                flex = promotionFlex(yesData)
+                flex = flexm.promotionFlex(yesData)
                 dataResponse = {
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
