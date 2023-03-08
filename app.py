@@ -35,9 +35,9 @@ def hello():
 @cross_origin()
 def appLine():
     try:
-        jsonReq = request.json
+        event_data = request.json
         tokenLine = tokenLineBot()
-        eventsLine = jsonReq['events'][0]
+        eventsLine = event_data['events'][0]
         replyToken = eventsLine['replyToken']
         userId = eventsLine['source']['userId']
         typeEvents = eventsLine['type']
