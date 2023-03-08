@@ -1,7 +1,7 @@
 from lib import *
-from config.token import tokenLineBot
-from flexMessage.flex import selectTypeCar
-from flexMessage.flex import promotionFlex
+from tokenLine import tokenLineBot
+from flex import selectTypeCar
+from flex import promotionFlex
 
 def authenticateUser():
     try:

@@ -1,7 +1,7 @@
-from .webhookLine.action import *
-from .service.line import *
+from action import *
+from line import *
 from lib import *
-from .config.token import *
+from tokenLine import *
 
 app = flask.Flask(__name__)
 CORS(app)
