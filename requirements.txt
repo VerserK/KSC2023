@@ -3,5 +3,3 @@ flask_cors
 psycopg2
 jsons==1.6.3
 jsonify
-json
-requests
