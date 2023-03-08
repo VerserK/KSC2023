@@ -2,10 +2,5 @@ Flask==2.0.2
 flask_cors
 psycopg2
 typing
-jsons
+jsons==1.6.3
 jsonify
-uuid
-requests
-jwt
-json
-os
