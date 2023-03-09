@@ -35,13 +35,13 @@ def hello():
 @cross_origin()
 def appLine():
     # try:
-            req = request.json
-            tokenLine = tokenLineBot()
-            eventsLine = req['events'][0]
-            replyToken = eventsLine['replyToken']
-            userId = eventsLine['source']['userId']
-            typeEvents = eventsLine['type']
-            return jsonify({ 'response': 'OK'})
+    req = request.json
+    tokenLine = tokenLineBot()
+    eventsLine = req['events'][0]
+    replyToken = eventsLine['replyToken']
+    userId = eventsLine['source']['userId']
+    typeEvents = eventsLine['type']
+    return jsonify({ 'response': 'OK'})
         # if typeEvents == 'message' :
         #     if eventsLine['message']['type'] == "text" :
         #         if eventsLine['message']['text'] == "ต้องการสอบถามโปรโมชันของสินค้าใดครับ ?" :
