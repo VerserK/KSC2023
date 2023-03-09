@@ -144,7 +144,7 @@ def appLine():
         #         sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
         # else :
         #     sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
-        return jsonify({ 'response': req})
+            return jsonify({ 'response': req})
     # except Exception as error:
     #     return jsonify({'response':'ER'})
 
