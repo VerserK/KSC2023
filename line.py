@@ -4,7 +4,7 @@ import json
 def sendReplyMessageTextLine(tokenLine, replyToken, message):
     url = "https://api.line.me/v2/bot/message/reply"
 
-    payload = {
+    payload = json.dumps({
     "replyToken": replyToken,
     "messages": [
         {
@@ -12,20 +12,20 @@ def sendReplyMessageTextLine(tokenLine, replyToken, message):
             "text": message
         }
     ]
-    }
+    })
     headers = {
     'Authorization': 'Bearer '+tokenLine,
     'Content-Type': 'application/json'
     }
 
-    response = requests.post(url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload)
     return response
 
 
 def sendReplyFlexMessageLine(tokenLine, replyToken, message):
     url = "https://api.line.me/v2/bot/message/reply"
 
-    payload = {
+    payload = json.dumps({
     "replyToken": replyToken,
     "messages": [
         {
@@ -34,19 +34,19 @@ def sendReplyFlexMessageLine(tokenLine, replyToken, message):
         "contents": message
         }
     ]
-    }
+    })
     headers = {
     'Authorization': 'Bearer '+tokenLine,
     'Content-Type': 'application/json'
     }
 
-    response = requests.post(url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload)
     return response
 
 def sendReplyFlexMessageAllMsgLine(tokenLine, replyToken, message):
     url = "https://api.line.me/v2/bot/message/reply"
 
-    payload = {
+    payload = json.dumps({
     "replyToken": replyToken,
     "messages": [
         {
@@ -59,19 +59,19 @@ def sendReplyFlexMessageAllMsgLine(tokenLine, replyToken, message):
         "contents": message['flex']
         }
     ]
-    }
+    })
     headers = {
     'Authorization': 'Bearer '+tokenLine,
     'Content-Type': 'application/json'
     }
 
-    response = requests.post(url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload)
     return response
 
 def sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, message, packageId, stId):
     url = "https://api.line.me/v2/bot/message/reply"
 
-    payload = {
+    payload = json.dumps({
     "replyToken": replyToken,
     "messages": [
         {
@@ -84,11 +84,11 @@ def sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, message, packageId,
             "stickerId": stId
         }
     ]
-    }
+    })
     headers = {
     'Authorization': 'Bearer '+tokenLine,
     'Content-Type': 'application/json'
     }
 
-    response = requests.post(url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload)
     return response
