@@ -42,7 +42,7 @@ def appLine():
             replyToken = eventsLine['replyToken']
             userId = eventsLine['source']['userId']
             typeEvents = eventsLine['type']
-            return typeEvents
+            return req
         
         if typeEvents == 'message' :
             if eventsLine['message']['type'] == "text" :
