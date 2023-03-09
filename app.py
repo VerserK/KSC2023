@@ -4,23 +4,11 @@ import os
 from action import *
 from line import *
 from tokenLine import *
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError,LineBotApiError
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,FlexSendMessage,SourceUser,LocationSendMessage, RichMenu, RichMenuArea, RichMenuSize,
-    RichMenuBounds, URIAction, MessageAction, FollowEvent
-)
 
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-line_bot_api = LineBotApi('DyITlNB5yxdCVz0PON6HSVmND2UwXVnRF6mEzlE16R0k4f0+Tn9QCjYzt8cnYOnU67tdzaSzj0KXL2U9G/d8U1lW7qDOjOT0MSeAZ24YtinOXZYVEGyEwQjyUxY2h12WcNUIyTGQJ7GswwqJQZcofwdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('5918103e14e75de5ececff14766bbbdc')
 
 @app.route('/')
 def index():
@@ -47,12 +35,13 @@ def hello():
 @cross_origin()
 def appLine():
     try:
-        req = request.get_json(silent=True, force=True)
-        tokenLine = tokenLineBot()
-        eventsLine = req['events'][0]
-        replyToken = eventsLine['replyToken']
-        userId = eventsLine['source']['userId']
-        typeEvents = eventsLine['type']
+        if request.method == 'POST':
+            req = request.json
+            tokenLine = tokenLineBot()
+            eventsLine = req['events'][0]
+            replyToken = eventsLine['replyToken']
+            userId = eventsLine['source']['userId']
+            typeEvents = eventsLine['type']
         
         if typeEvents == 'message' :
             if eventsLine['message']['type'] == "text" :
