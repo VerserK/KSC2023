@@ -9,11 +9,6 @@ from tokenLine import *
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-   
-@app.route('/db', methods=['GET'])
-def checkDatabase():
-    data = checkDB()
-    return jsonify({ 'excel1':data})
 
 @app.route('/api/v1/appLine', methods=['POST'])
 @cross_origin()

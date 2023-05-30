@@ -6,3 +6,4 @@ jsonify
 requests==2.28.2
 line-bot-sdk
 pymssql==2.2.7
+pandas
