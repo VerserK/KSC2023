@@ -245,7 +245,104 @@ def selectTypeCar():
     return data
 
 def promotionFlex(yesData):
-    data = {
+    if yesData == 'ไม่มีข้อมูล' :
+        data = {
+            "type": "bubble",
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": "ลูกค้ามีสิทธิ์รับโปรโมชันพิเศษ ต้องการสอบถามโปรโมชันพิเศษด้วยหรือไม่ครับ",
+                    "wrap": True
+                }
+                ],
+                "position": "relative"
+            },
+            "footer": {
+                "type": "box",
+                "layout": "horizontal",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                    "type": "postback",
+                    "label": "ใช่",
+                    "data": yesData,
+                    "displayText": "โปรโมชันพิเศษ",
+                    "inputOption": "openKeyboard"
+                    }
+                },
+                {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                    "type": "postback",
+                    "label": "ไม่ใช่",
+                    "data": "ไม่ใช่"
+                    }
+                }
+                ],
+                "flex": 0
+            }
+            }
+    else :
+        data = {
+            "type": "bubble",
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": "ลูกค้ามีสิทธิ์รับโปรโมชันพิเศษ ต้องการสอบถามโปรโมชันพิเศษด้วยหรือไม่ครับ",
+                    "wrap": True
+                }
+                ],
+                "position": "relative"
+            },
+            "footer": {
+                "type": "box",
+                "layout": "horizontal",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                    "type": "postback",
+                    "label": "ใช่",
+                    "data": "มีข้อมูล",
+                    "displayText": "โปรโมชันพิเศษ",
+                    "inputOption": "openKeyboard",
+                    "fillInText": "สอบถามสิทธิ์คงเหลือของ "+yesData+" กรุณาระบุหมายเลขรถ : "
+                    }
+                },
+                {
+                    "type": "button",
+                    "style": "link",
+                    "height": "sm",
+                    "action": {
+                    "type": "postback",
+                    "label": "ไม่ใช่",
+                    "data": "ไม่ใช่"
+                    }
+                }
+                ],
+                "flex": 0
+            }
+            }
+    
+    return data
+
+def flexPromotionSpecial(textPromotion, amountAll, amountUse, amountRemaining, VIN) :
+    return {
         "type": "bubble",
         "body": {
             "type": "box",
@@ -253,40 +350,287 @@ def promotionFlex(yesData):
             "contents": [
             {
                 "type": "text",
-                "text": "ต้องการสอบถามโปรโมชันพิเศษด้วยหรือไม่ครับ?",
-                "wrap": True
-            }
-            ],
-            "position": "relative"
-        },
-        "footer": {
-            "type": "box",
-            "layout": "horizontal",
-            "spacing": "sm",
-            "contents": [
-            {
-                "type": "button",
-                "style": "link",
-                "height": "sm",
-                "action": {
-                "type": "postback",
-                "label": "ใช่",
-                "data": yesData
-                }
+                "text": "โปรโมชันพิเศษ",
+                "weight": "bold",
+                "color": "#1DB446",
+                "size": "xl"
             },
             {
-                "type": "button",
-                "style": "link",
-                "height": "sm",
-                "action": {
-                "type": "postback",
-                "label": "ไม่ใช่",
-                "data": "ไม่ใช่"
+                "type": "text",
+                "text": textPromotion,
+                "weight": "bold",
+                "size": "lg",
+                "margin": "md",
+                "wrap": True
+            },
+            {
+                "type": "separator",
+                "margin": "xxl"
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "xxl",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "สิทธิ์ทั้งหมด",
+                        "size": "sm",
+                        "color": "#555555",
+                        "flex": 0,
+                        "weight": "regular"
+                    },
+                    {
+                        "type": "text",
+                        "text": amountAll,
+                        "size": "sm",
+                        "color": "#111111",
+                        "align": "end",
+                        "weight": "bold"
+                    }
+                    ]
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "สิทธิ์ที่ใช้ไปแล้ว",
+                        "size": "sm",
+                        "color": "#555555",
+                        "flex": 0,
+                        "weight": "regular"
+                    },
+                    {
+                        "type": "text",
+                        "text": amountUse,
+                        "size": "sm",
+                        "color": "#111111",
+                        "align": "end",
+                        "weight": "bold"
+                    }
+                    ]
+                },
+                {
+                    "type": "separator",
+                    "margin": "xxl"
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "margin": "xxl",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "สิทธิ์คงเหลือ",
+                        "size": "sm",
+                        "color": "#555555"
+                    },
+                    {
+                        "type": "text",
+                        "text": amountRemaining,
+                        "size": "sm",
+                        "color": "#111111",
+                        "align": "end",
+                        "weight": "bold"
+                    }
+                    ]
                 }
+                ]
+            },
+            {
+                "type": "separator",
+                "margin": "xxl"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "margin": "md",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": "หมายเลขรถ",
+                    "size": "xs",
+                    "color": "#aaaaaa",
+                    "flex": 0
+                },
+                {
+                    "type": "text",
+                    "text": VIN,
+                    "color": "#aaaaaa",
+                    "size": "xs",
+                    "align": "end",
+                    "wrap": True
+                }
+                ]
             }
-            ],
-            "flex": 0
+            ]
+        },
+        "styles": {
+            "footer": {
+            "separator": True
+            }
         }
+}
+    
+def flecCheckEligibility(typeData) :
+    return {
+            "type": "carousel",
+            "contents": [
+                {
+                "type": "bubble",
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "ตรวจสอบสิทธิ์ "+typeData,
+                        "wrap": True,
+                        "weight": "bold",
+                        "size": "md",
+                        "action": {
+                        "type": "postback",
+                        "label": "action",
+                        "data": "hello"
+                        }
+                    }
+                    ]
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary",
+                            "action": {
+                            "type": "postback",
+                            "label": "คลิกที่นี่",
+                            "data": "เช็คสิทธิ์",
+                            "inputOption": "openKeyboard",
+                            "fillInText": "กรุณาระบุหมายเลขรถเพื่อตรวจสอบสิทธิ์ "+typeData+" : "
+                            }
+                        }
+                    ]
+                }
+                }
+            ]
         }
     
-    return data
+def flexLimitParts(data, img) :
+    return {
+        "type": "bubble",
+        "size": "micro",
+        "hero": {
+            "type": "image",
+            "url": img,
+            "size": "full",
+            "aspectMode": "cover",
+            "aspectRatio": "320:213"
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+            {
+                "type": "text",
+                "text": data['Material Group'],
+                "weight": "bold",
+                "size": "xs",
+                "wrap": True,
+                "color": "#72716d"
+            },
+            {
+                "type": "separator",
+                "margin": "sm"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": "โควต้าทั้งหมด",
+                    "flex": 0,
+                    "color": "#555555",
+                    "size": "xs",
+                    "weight": "regular",
+                    "wrap": True
+                },
+                {
+                    "type": "text",
+                    "text": str(data['Maximum Limit']),
+                    "color": "#111111",
+                    "size": "xs",
+                    "weight": "bold",
+                    "align": "end",
+                    "wrap": True
+                }
+                ]
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": "ใช้ไปแล้ว",
+                    "flex": 0,
+                    "size": "xs",
+                    "color": "#555555",
+                    "weight": "regular",
+                    "wrap": True
+                },
+                {
+                    "type": "text",
+                    "text": str(data['Quantity']),
+                    "size": "xs",
+                    "color": "#111111",
+                    "weight": "bold",
+                    "align": "end",
+                    "wrap": True
+                }
+                ]
+            },
+            {
+                "type": "separator",
+                "margin": "sm"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": "คงเหลือ",
+                    "flex": 0,
+                    "size": "xs",
+                    "color": "#006633",
+                    "weight": "regular",
+                    "wrap": True
+                },
+                {
+                    "type": "text",
+                    "text": str(data['Remain Volume']),
+                    "size": "xs",
+                    "color": "#006633",
+                    "weight": "bold",
+                    "align": "end",
+                    "wrap": True
+                }
+                ]
+            }
+            ],
+            "spacing": "sm",
+            "paddingAll": "13px"
+        }
+    }
