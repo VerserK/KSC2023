@@ -214,15 +214,15 @@ def promotionSpecial(param, vin):
 def checkImage(model):
     try:
         if model == 'รถแทรกเตอร์(1)' or model == 'รถแทรกเตอร์(2)':
-            image = '01'
+            image = 'TT'
         elif  model == 'รถเกี่ยวข้าว':
-            image = '02'
+            image = 'CH'
         elif  model == 'รถขุด':
-            image = '03'
+            image = 'ME'
         elif  model == 'รถดำนานั่งขับ' or model == 'รถดำนาเดินตาม':
             image = 'not'
         else :
-            image = 'all'     
+            image = 'ALL'     
 
         return image 
     except Exception as error:

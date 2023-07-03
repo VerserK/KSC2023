@@ -153,7 +153,8 @@ def appLine():
     
 @app.route('/image/<path:fileName>')
 def openImage(fileName):
-    return send_from_directory(os.path.join(app.root_path, 'image'), fileName+'.png')
+    pathFile = 'https://csblobfile.blob.core.windows.net/ksc2023/'
+    return send_from_directory(os.path.join(pathFile, fileName+'.png'))
 
 if __name__ == "__main__":
     app.run()
