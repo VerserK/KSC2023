@@ -141,7 +141,8 @@ def appLine():
                 if fileName == 'not':
                     sendReplyMessageTextLine(tokenLine, replyToken, "ขออภัยครับ ในไตรมาสนี้ไม่มีโปรโมชันพิเศษของรถดำนาครับ")
                 else :
-                    pathImage = DOMAIN+'/image/'+fileName
+                    pathFile = 'https://csblobfile.blob.core.windows.net/ksc2023/'
+                    pathImage = pathFile + fileName + '.PNG'
                     sendReplyImageMessageAllMsgLine(tokenLine, replyToken, "โปรโมชันพิเศษประจำไตรมาสนี้", pathImage)
             else :
                 sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
@@ -154,7 +155,7 @@ def appLine():
 @app.route('/image/<path:fileName>')
 def openImage(fileName):
     pathFile = 'https://csblobfile.blob.core.windows.net/ksc2023/'
-    return send_from_directory(pathFile + fileName + '.PNG'))
+    return send_from_directory(pathFile + fileName + '.PNG')
 
 if __name__ == "__main__":
     app.run()
