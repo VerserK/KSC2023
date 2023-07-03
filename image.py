@@ -23,4 +23,7 @@ def getImageURL(name):
         imageId = 'AFGJ81rNg7AzhOKKkdVN4jL5uA6QPtl9O8waMg5tCJ9rmmzoe1EDghCUdgqf1yMTUHwF2K-7Bi1Bj2iAaNGDFtutDCHl6b8T7g=s1600'
     
     return 'https://lh3.googleusercontent.com/drive-viewer/'+imageId
+
+def imageLimitPart():
+    return 'https://lh3.googleusercontent.com/drive-viewer/AFGJ81qmSewZfcUUHEx_NjxNWXrzp-gG2SA808xjA1KQi1fKKL4696lkdPot3SguLT_DlyvbnF3e-QP7pXE9onaU-Arn6FGi=s1600'
         

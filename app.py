@@ -4,11 +4,15 @@ import os
 from action import *
 from line import *
 from tokenLine import *
+from image import *
 # from database import *
 
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+DOMAIN = "https://ksc2023.azurewebsites.net/api/v1/appLine"
+   
 
 @app.route('/api/v1/appLine', methods=['POST'])
 @cross_origin()
@@ -50,35 +54,35 @@ def appLine():
                             newStr = listStr[3]
                             response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736', response['yes'])
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], response['packageId'], response['stickerId'], response['yes'])
                             else :
                                 sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         elif listStr[0] == "รถเกี่ยวนวดข้าวไม่รวมตีนตะขาบ" :
                             newStr = listStr[3]
                             response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736', response['yes'])
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], response['packageId'], response['stickerId'], response['yes'])
                             else :
                                 sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         elif listStr[0] == "รถขุด" :
                             newStr = listStr[3]
                             response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736', response['yes'])
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], response['packageId'], response['stickerId'], response['yes'])
                             else :
                                 sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         elif listStr[0] == "รถดำนาเดินตาม" :
                             newStr = listStr[3]
                             response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736', response['yes'])
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], response['packageId'], response['stickerId'], response['yes'])
                             else :
                                 sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         elif listStr[0] == "รถดำนานั่งขับ" :
                             newStr = listStr[3]
                             response = promotion(newStr, listStr[0])
                             if response['response'] == 'OK' :
-                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], '11537', '52002736', response['yes'])
+                                sendReplyStickerMessageAllMsgLine(tokenLine, replyToken, response['data'], response['packageId'], response['stickerId'], response['yes'])
                             else :
                                 sendReplyMessageTextLine(tokenLine, replyToken, "ไม่สำเร็จ")
                         else :
@@ -110,7 +114,7 @@ def appLine():
                             response = limitParts(listStr[4])
                             if response['response'] == 'OK' :
                                 if response['list1'] == [] :
-                                    sendReplyMessageTextLine(tokenLine, replyToken, "ไม่พบข้อมูล")
+                                    sendReplyImageMessageAllMsgLine(tokenLine, replyToken, "รถคันนี้ยังไม่ได้ใช้อะไหล่ในช่วงที่จำกัดเวลา และมีอะไหล่คงเหลือตามตารางนี้ครับ", imageLimitPart())
                                 else :
                                     sendReplyFlexListMessageLine(tokenLine, replyToken, response['list1'], response['list2'], 'Limit Parts')
                             else :
@@ -130,6 +134,15 @@ def appLine():
                 sendReplyMessageTextLine(tokenLine, replyToken, "กรุณาระบุหมายเลขรถของคุณเพื่อสอบถามโปรโมชันพิเศษ")
             elif eventsLine['postback']['data'] == "เช็คสิทธิ์" :
                 sendReplyMessageTextLine(tokenLine, replyToken, "กรุณาระบุหมายเลขรถของคุณเพื่อตรวจสอบสิทธิ์")
+            elif eventsLine['postback']['data'].find("โปรโมชันพิเศษ") != -1 :
+                listStr = eventsLine['postback']['data'].split('.')
+                model = str(listStr[1])
+                fileName = checkImage(model)
+                if fileName == 'not':
+                    sendReplyMessageTextLine(tokenLine, replyToken, "ขออภัยครับ ในไตรมาสนี้ไม่มีโปรโมชันพิเศษของรถดำนาครับ")
+                else :
+                    pathImage = DOMAIN+'/image/'+fileName
+                    sendReplyImageMessageAllMsgLine(tokenLine, replyToken, "โปรโมชันพิเศษประจำไตรมาสนี้", pathImage)
             else :
                 sendReplyMessageTextLine(tokenLine, replyToken, "โปรดเลือกจาก rich menu")
         else :
@@ -137,6 +150,10 @@ def appLine():
         return jsonify({ 'response':'OK'})
     except Exception as error:
         return jsonify({'response':'ER'})
+    
+@app.route('/image/<path:fileName>')
+def openImage(fileName):
+    return send_from_directory(os.path.join(app.root_path, 'image'), fileName+'.png')
 
 if __name__ == "__main__":
     app.run()

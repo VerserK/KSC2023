@@ -272,9 +272,7 @@ def promotionFlex(yesData):
                     "action": {
                     "type": "postback",
                     "label": "ใช่",
-                    "data": yesData,
-                    "displayText": "โปรโมชันพิเศษ",
-                    "inputOption": "openKeyboard"
+                    "data": yesData
                     }
                 },
                 {
@@ -318,10 +316,7 @@ def promotionFlex(yesData):
                     "action": {
                     "type": "postback",
                     "label": "ใช่",
-                    "data": "มีข้อมูล",
-                    "displayText": "โปรโมชันพิเศษ",
-                    "inputOption": "openKeyboard",
-                    "fillInText": "สอบถามสิทธิ์คงเหลือของ "+yesData+" กรุณาระบุหมายเลขรถ : "
+                    "data": yesData
                     }
                 },
                 {

@@ -160,3 +160,28 @@ def sendReplyFlexListMessageLine(tokenLine, replyToken, list1, list2, alt):
 
     response = requests.request("POST", url, headers=headers, data=payload)
     return response
+
+def sendReplyImageMessageAllMsgLine(tokenLine, replyToken, message, image):
+    url = "https://api.line.me/v2/bot/message/reply"
+
+    payload = json.dumps({
+    "replyToken": replyToken,
+    "messages": [
+        {
+            "type": "text",
+            "text": message
+        },
+        {
+            "type": "image",
+            "originalContentUrl": image,
+            "previewImageUrl": image
+        }
+    ]
+    })
+    headers = {
+    'Authorization': 'Bearer '+tokenLine,
+    'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    return response

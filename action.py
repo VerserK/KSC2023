@@ -4,9 +4,8 @@
 from flex import *
 from image import *
 from database import *
-import pandas
 import math
-
+from datetime import datetime, timezone, timedelta
 
 def authenticateUser():
     try:
@@ -17,6 +16,8 @@ def authenticateUser():
     
 def promotion(amount, typeCar):
     try:
+        packageId = '11537'
+        stickerId = '52002736'
         newAmount = int(amount)
         if typeCar == 'รถแทรกเตอร์':
             if newAmount < 1000:
@@ -26,31 +27,29 @@ def promotion(amount, typeCar):
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
-            elif newAmount >= 1000 and newAmount < 2000:
+                packageId = '8522'
+                stickerId = '16581286'
+            elif newAmount >= 1000 and newAmount < 3000:
                 yesData = 'ไม่มีข้อมูล'
                 flex = yesData
                 dataResponse = {
-                    'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 10% ครับ',
+                    'msg':'ลูกค้าได้รับส่วนลดค่าอะไหล่ 10% ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
-            elif newAmount >= 2000 and newAmount < 5000:
-                yesData = 'โปรโมชันพิเศษรถแทรกเตอร์(1)'
+            elif newAmount >= 3000 and newAmount < 5000:
+                yesData = 'โปรโมชันพิเศษ.รถแทรกเตอร์(1)'
                 flex = promotionFlex(yesData)
                 dataResponse = {
-                    'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 10% ครับ',
+                    'msg':'ลูกค้าได้รับส่วนลดค่าอะไหล่ 10% ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
             elif newAmount >= 5000:
-                yesData = 'โปรโมชันพิเศษรถแทรกเตอร์(2)'
+                yesData = 'โปรโมชันพิเศษ.รถแทรกเตอร์(2)'
                 flex = promotionFlex(yesData)
                 dataResponse = {
-                    'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% ครับ',
+                    'msg':'ลูกค้าได้รับส่วนลดค่าอะไหล่ 15% ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
         elif typeCar == 'รถเกี่ยวนวดข้าวไม่รวมตีนตะขาบ':
             if newAmount < 5000:
                 yesData = 'ไม่มีข้อมูล'
@@ -59,40 +58,46 @@ def promotion(amount, typeCar):
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
-            elif newAmount >= 5000:
-                yesData = 'โปรโมชันพิเศษรถเกี่ยวข้าว'
-                flex = promotionFlex(yesData)
+                packageId = '8522'
+                stickerId = '16581286'
+            elif newAmount >= 5000 and newAmount < 10000:
+                yesData = 'ไม่มีข้อมูล'
+                flex = yesData
                 dataResponse = {
-                    'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% ครับ',
+                    'msg':'ลูกค้าได้รับส่วนลดค่าอะไหล่ 15% ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
+            elif newAmount >= 10000:
+                yesData = 'โปรโมชันพิเศษ.รถเกี่ยวข้าว'
+                flex = promotionFlex(yesData)
+                dataResponse = {
+                    'msg':'ลูกค้าได้รับส่วนลดค่าอะไหล่ 15% ครับ',
+                    'flex':flex
+                }
         elif typeCar == 'รถขุด':
-            if newAmount >= 3000 and newAmount < 5000:
-                yesData = 'โปรโมชันพิเศษรถขุด'
+            if newAmount < 5000:
+                yesData = 'ไม่มีข้อมูล'
+                flex = yesData
+                dataResponse = {
+                    'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
+                    'flex':flex
+                }
+                packageId = '8522'
+                stickerId = '16581286'
+            elif newAmount >= 5000 and newAmount < 10000:
+                yesData = 'โปรโมชันพิเศษ.รถขุด'
                 flex = promotionFlex(yesData)
                 dataResponse = {
-                    'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
+                    'msg':'ลูกค้าได้รับส่วนลดค่าอะไหล่ 15% ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
-            elif newAmount >= 5000:
-                yesData = 'ไม่มีข้อมูล'
-                flex = yesData
+            elif newAmount >= 10000:
+                yesData = 'โปรโมชันพิเศษ.รถขุด'
+                flex = promotionFlex(yesData)
                 dataResponse = {
-                    'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% ครับ',
+                    'msg':'ลูกค้าได้รับส่วนลดค่าอะไหล่ 15% ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
-            else :
-                yesData = 'ไม่มีข้อมูล'
-                flex = yesData
-                dataResponse = {
-                    'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
-                    'flex':flex
-                }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
         elif typeCar == 'รถดำนาเดินตาม':
             if newAmount > 1 and newAmount < 10000:
                 yesData = 'ไม่มีข้อมูล'
@@ -101,15 +106,13 @@ def promotion(amount, typeCar):
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% (ชุดส้อมหัวปักดำและยางลด 10%) ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
             elif newAmount >= 10000:
-                yesData = 'โปรโมชันพิเศษรถดำนาเดินตาม'
-                flex = promotionFlex(yesData)
+                yesData = 'ไม่มีข้อมูล'
+                flex = yesData
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% (ชุดส้อมหัวปักดำและยางลด 10%) ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
             else :
                 yesData = 'ไม่มีข้อมูล'
                 flex = yesData
@@ -117,7 +120,8 @@ def promotion(amount, typeCar):
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
+                packageId = '8522'
+                stickerId = '16581286'
         elif typeCar == 'รถดำนานั่งขับ':
             if newAmount >= 1000 and newAmount < 5000:
                 yesData = 'ไม่มีข้อมูล'
@@ -126,7 +130,6 @@ def promotion(amount, typeCar):
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 10% ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
             elif newAmount >= 5000 and newAmount < 10000:
                 yesData = 'ไม่มีข้อมูล'
                 flex = yesData
@@ -134,15 +137,13 @@ def promotion(amount, typeCar):
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% (ชุดส้อมหัวปักดำและยางลด 10%) ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
             elif newAmount >= 10000:
-                yesData = 'โปรโมชันพิเศษรถดำนานั่งขับ'
-                flex = promotionFlex(yesData)
+                yesData = 'ไม่มีข้อมูล'
+                flex = yesData
                 dataResponse = {
                     'msg':'ลูกค้าได้รับส่วนลดอะไหล่ 15% (ชุดส้อมหัวปักดำและยางลด 10%) ครับ',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
             else :
                 yesData = 'ไม่มีข้อมูล'
                 flex = yesData
@@ -150,7 +151,10 @@ def promotion(amount, typeCar):
                     'msg':'ยังไม่ถึงเกณฑ์ที่จะได้รับโปรโมชัน',
                     'flex':flex
                 }
-                return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex']}
+                packageId = '8522'
+                stickerId = '16581286'
+                
+        return {'response':'OK', 'data':dataResponse['msg'], 'yes':dataResponse['flex'], 'packageId':packageId, 'stickerId':stickerId}
     except Exception as error:
         return {'response':'ER', 'data':None}
     
@@ -207,6 +211,24 @@ def promotionSpecial(param, vin):
         print(error)
         return {'response':'ER', 'data':None}
     
+def checkImage(model):
+    try:
+        if model == 'รถแทรกเตอร์(1)' or model == 'รถแทรกเตอร์(2)':
+            image = '01'
+        elif  model == 'รถเกี่ยวข้าว':
+            image = '02'
+        elif  model == 'รถขุด':
+            image = '03'
+        elif  model == 'รถดำนานั่งขับ' or model == 'รถดำนาเดินตาม':
+            image = 'not'
+        else :
+            image = 'all'     
+
+        return image 
+    except Exception as error:
+        print(error)
+        return {'response':'ER', 'data':None}
+    
 def checkEligibility(typeData) :
     try:
         flex = flecCheckEligibility(typeData)
@@ -235,9 +257,13 @@ def welcomeHome(vin) :
     
 def limitParts(vin) :
     try:
+        dateTime = datetime.now(timezone.utc) + timedelta(hours=7)
+        listDateTime = str(dateTime).split(' ')
+        today = listDateTime[0]
+        
         connect = conn()
         cursor = connect.cursor(as_dict=True)
-        cursor.execute("SELECT * FROM [Remaining_Parts] WHERE [VIN] = %s", (vin))
+        cursor.execute("SELECT * FROM [Remaining_Parts] WHERE [VIN] = %s AND %s BETWEEN [Valid From] AND [Valid To]", (vin, today))
         
         dataLimit = cursor.fetchall()
         connect.close()
