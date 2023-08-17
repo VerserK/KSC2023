@@ -25,5 +25,4 @@ def getImageURL(name):
     return 'https://csblobfile.blob.core.windows.net/ksc2023/'+imageId
 
 def imageLimitPart():
-    return 'https://csblobfile.blob.core.windows.net/ksc2023/ตารางโควต้าอะไหล่บำรุงรักษา.png'
-        
+    return 'https://csblobfile.blob.core.windows.net/ksc2023/Maintenance_spare_parts_quota_table.png'
