@@ -260,14 +260,13 @@ def limitParts(vin) :
         dateTime = datetime.now(timezone.utc) + timedelta(hours=7)
         listDateTime = str(dateTime).split(' ')
         today = listDateTime[0]
-        
+
         connect = conn()
         cursor = connect.cursor(as_dict=True)
         cursor.execute("SELECT * FROM [Remaining_Parts] WHERE [VIN] = %s AND %s BETWEEN [Valid From] AND [Valid To]", (vin, today))
-        
         dataLimit = cursor.fetchall()
         connect.close()
-        
+
         if dataLimit == []:
             return {'response':'OK', 'list1':[], 'list2':[]}
         else :
@@ -285,7 +284,11 @@ def limitParts(vin) :
                 else :
                     listData1.append(flex)
 
-            return {'response':'OK', 'list1':listData1, 'list2':listData2}
+            # return {'response':'OK', 'list1':listData1, 'list2':listData2}
+            return 'hello'
     except Exception as error:
         print(error)
         return {'response':'ER', 'data':None} 
+    
+
+limitParts('B2440D31091')
