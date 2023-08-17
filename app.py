@@ -112,10 +112,16 @@ def appLine():
                             else :
                                 sendReplyMessageTextLine(tokenLine, replyToken, "เกิดข้อผิดพลาด")
                         else :
+                            print('else')
+                            logging.info('else')
                             response = limitParts(listStr[4])
+                            print(response)
                             if response['response'] == 'OK' :
+                                logging.info('OK')
+                                print('OK')
                                 if response['list1'] == [] :
                                     logging.info('Empty List 1')
+                                    print('Empty List 1')
                                     sendReplyImageMessageAllMsgLine(tokenLine, replyToken, "รถคันนี้ยังไม่ได้ใช้อะไหล่ในช่วงที่จำกัดเวลา และมีอะไหล่คงเหลือตามตารางนี้ครับ", imageLimitPart())
                                 else :
                                     sendReplyFlexListMessageLine(tokenLine, replyToken, response['list1'], response['list2'], 'Limit Parts')
