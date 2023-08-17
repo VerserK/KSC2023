@@ -6,6 +6,7 @@ from line import *
 from tokenLine import *
 from image import *
 # from database import *
+import logging
 
 app = Flask(__name__)
 CORS(app)
@@ -114,6 +115,7 @@ def appLine():
                             response = limitParts(listStr[4])
                             if response['response'] == 'OK' :
                                 if response['list1'] == [] :
+                                    logging.info('Empty List 1')
                                     sendReplyImageMessageAllMsgLine(tokenLine, replyToken, "รถคันนี้ยังไม่ได้ใช้อะไหล่ในช่วงที่จำกัดเวลา และมีอะไหล่คงเหลือตามตารางนี้ครับ", imageLimitPart())
                                 else :
                                     sendReplyFlexListMessageLine(tokenLine, replyToken, response['list1'], response['list2'], 'Limit Parts')
