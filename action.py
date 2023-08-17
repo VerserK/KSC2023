@@ -284,11 +284,7 @@ def limitParts(vin) :
                 else :
                     listData1.append(flex)
 
-            # return {'response':'OK', 'list1':listData1, 'list2':listData2}
-            return 'hello'
+            return {'response':'OK', 'list1':listData1, 'list2':listData2}
     except Exception as error:
         print(error)
         return {'response':'ER', 'data':None} 
-    
-
-limitParts('B2440D31091')
