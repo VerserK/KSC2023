@@ -1,29 +1,29 @@
 def getImageURL(name):
     if name.find("น้ำยาหม้อน้ำ") != -1:
         if name.find("1") != -1:
-           imageId = 'AFGJ81r5FoF_BGL8JCsC8_4TMQEqtiFMY1KS_TVaqVv1I6dhJJTA2dlknUyWFyRcBbjGQltkCIxTCdo7FZu_7hHl5d3ZvHaXSA=s1600'
+           imageId = 'AITFw-xLWks2vSriTa5gEOM9FL6l9gPF61Z9TjxmABaNdsJV01_InllRZOTnNUAUePrXt8KCRj8g0vAithhc4R0JjCf9SCEEZw=s1600'
         else : 
-            imageId = 'AFGJ81qWU_hWJJP84YO9iDWF0E0HNd5kyOHh8zbpj3w5_OHZ4Dod_YjPBoPUjnZ8J8RHCkzlwYGBvd2LSNHWKDSN3_a67hIuwQ=s1600'
+            imageId = 'AITFw-xWLFnnteKmdKqDUQCMcAiiEw51W795nBHr_Q58QGE8F3lnm2qDJPEw8axUtEmue9feidSArGKJJxS4s4vYrB0FruXb=s1600'
     elif name.find("น้ำมันขับเคลื่อน") != -1:
         if name.find("3") != -1:
-            imageId = 'AFGJ81ombxOljdGJ79Ia4C1jBJxny79K8QO1kPAFMi_sp5tDt8FpyaE8myMpKMERgOVFfI1lyoCJUAMpuVnsFjsKqE3XbNHKDw=s1600'
+            imageId = 'AITFw-wsb5-CduB8C1KJ2gvP3Nmq1vFckmUEz8gWrQQpQp3yVrIfuOdql821ghJjA0OrIqivpCkiuivuv0qCySo07zXhczsK8A=s1600'
         else : 
-            imageId = 'AFGJ81rWcBK62VKuWdkej-3othORGSTETeqWf08C6eQVqJ1EAvfE06avfIcx8U6WO_3Q4JUAo8aZ1Rf7SNO9X06gGoe-KIfj=s1600'
+            imageId = 'AITFw-xEHgCq5LQbpgvrmyJI5T-B9AkmxxVNRmU0v-Sbc9aRDYMofNiGZbP4dpVa92lSJ4yjDEfDdFByJ0WJnLPC0vETom3BnQ=s1600'
     elif name.find("น้ำมันยูดีทีตราช้าง") != -1:
         if name.find("18") != -1:
-            imageId = 'AFGJ81qKf57qJzDEvI6V9Xv-og_YTTuVPLikl4vC7PgFL0MYa-nl5BxxsQoty8RPQP3z5CiOrcKBqDErqWB2UuymSUeiB4Q66A=s1600'
+            imageId = 'AITFw-yn_A4bSSdsfwi7FeVH9oiOe6HejngDxzRKNd3aUxUDf54dZtoJxTKUyXKCFAEfOajBpcJz3HhegUzHPn3hZBAu2R-i_g=s1600'
         else : 
-            imageId = 'AFGJ81q4GB1x-Tyd3MZTgnLEM4d4-y9EGbRXr9Y4QEimr2gwZkxFQOgvQuUrDjNS7DRAINrGB3KkbHlyq-nq8qW74Jl9iaVOuw=s1600'
+            imageId = 'AITFw-zKnkEUAW9SDWH75zFnXiAoDnLM9ZOnjMrG04SNMP6urmYpVP9e0spuSgJHOItEiM9QPGt2YcOmff-jlhQaHt07hEfK2A=s1600'
     elif name.find("น้ำมันเครื่องตราช้าง") != -1:
         if name.find("3") != -1:
-            imageId = 'AFGJ81ombxOljdGJ79Ia4C1jBJxny79K8QO1kPAFMi_sp5tDt8FpyaE8myMpKMERgOVFfI1lyoCJUAMpuVnsFjsKqE3XbNHKDw=s1600'
+            imageId = 'AITFw-z8DFa2ut16aCdzIxcvtICkV3LCCF14-Ms_uSefi17Z2DEZ8c7tXXaRVGfub8hq-6_ANqzvew-TsWqFoLOeLvSioERlWA=s1600'
         else : 
-            imageId = 'AFGJ81qrUacQNwrLt5wSJWlsljbOzjJbDIQ70HOSb-zr6OMT8v3m8tf6mQRLq7F0uJri6hqeM7n7H2tqdFb266r9wclvoQ5qKg=s1600'
+            imageId = 'AITFw-zqYaQel3aHp6O6ZaseLIigKyDSCWL_prsLlQQnYF96DClA72XcBj1etJw9MjyASCTZgG7Ro7M6ssSzLiDvFA5AqmBvTw=s1600'
     else :
-        imageId = 'AFGJ81rNg7AzhOKKkdVN4jL5uA6QPtl9O8waMg5tCJ9rmmzoe1EDghCUdgqf1yMTUHwF2K-7Bi1Bj2iAaNGDFtutDCHl6b8T7g=s1600'
+        imageId = 'AITFw-y6Ro-8ltZU34JY2JN7Cvia0zG7A_k4ScgOrpHE_ZK75NxH0rrEP6DUHiYJTBY48WZAqEHgVaAcREi8UM5hVQMynxUf=s1600'
     
     return 'https://lh3.googleusercontent.com/drive-viewer/'+imageId
 
 def imageLimitPart():
-    return 'https://lh3.googleusercontent.com/drive-viewer/AFGJ81qmSewZfcUUHEx_NjxNWXrzp-gG2SA808xjA1KQi1fKKL4696lkdPot3SguLT_DlyvbnF3e-QP7pXE9onaU-Arn6FGi=s1600'
+    return 'https://lh3.googleusercontent.com/drive-viewer/AITFw-wTmOG1k9ni_L0L_iIjb6P2J6peC9AGFE6dzeSMibszlJvD0IYJiXmDSOvfeFvmEKH1QHWK4qhN67d7QRwpUCEPSbKIHQ=s1600'
         
